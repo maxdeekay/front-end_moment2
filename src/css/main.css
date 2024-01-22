@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    border-sizing: border-box;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -14,7 +14,7 @@ main {
     max-width: 50em;
     margin: 0 auto;
     border: 1px solid white;
-    margin-top: 1em;
+    margin: 1em;
     padding: 0 2em;
     display: flex;
     flex-direction: column;
@@ -33,6 +33,8 @@ input {
 table { width: 100%; margin-top: 2em; }
 th { text-align: left; }
 td { padding: 1em 0; text-align: left; }
-tr:hover { color: orange; cursor: pointer; }
-#table-name { width: 70%; }
+tbody>tr:hover { color: orange; cursor: pointer; }
+#table-name { width: 60%; }
 td:last-child, th:last-child { text-align: center; }
+thead>tr { text-decoration: underline; }
+thead>tr:hover { cursor: pointer; }

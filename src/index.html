@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/app.js" type="text/javascript" defer></script>
+    <script src="js/app.js" type="module"></script>
     <title>Moment 2</title>
 </head>
 <body>
@@ -14,26 +14,15 @@
         <input id="search-input" placeholder="Sök efter kurskod eller kursnamn"></input>
 
         <table>
-            <tr>
-                <th>Kurskod</th>
-                <th id="table-name">Namn</th>
-                <th>Progression</th>
-            </tr>
-            <tr>
-                <td>ik060</td>
-                <td>Projektledning</td>
-                <td>B</td>
-            </tr>
-            <tr>
-                <td>ik060</td>
-                <td>Projektledning</td>
-                <td>B</td>
-            </tr>
-            <tr>
-                <td>ik060</td>
-                <td>Projektledning</td>
-                <td>B</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th id="table-code">Kurskod</th>
+                    <th id="table-name">Namn</th>
+                    <th id="table-prog">Progression</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
     </main>
 </body>
