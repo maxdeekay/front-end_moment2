@@ -1,22 +1,15 @@
 "use strict";
 
 window.onload = async () => {
-    /* const thCodeElement = document.getElementById("table-code");
-    const thNameElement = document.getElementById("table-name");
-    const thProgElement = document.getElementById("table-prog"); */
-
-    /* const thElements = document.getElementsByTagName("th");
-    
-    thElements.forEach((th) => {
-        th.addEventListener("click", () => sortCourses(th.innerHTML));
-        console.log(th);
-    }); */
-
     const url = "https://dahlgren.miun.se/ramschema_ht23.php";
     const response = await fetch(url);
 
     if (response.ok) {
         const data = await response.json();
+
+        Array.from(document.getElementsByTagName("th")).forEach((e) => {
+            e.addEventListener("click", () => sortCourses(e.id, data));
+        });
 
         createTable(data);
     } else {
@@ -24,8 +17,27 @@ window.onload = async () => {
     }
 }
 
+function sortCourses(choice, courses) {
+    switch (choice) {
+        case "table-code":
+            courses.sort((a, b) => (a.code > b.code) ? 1 : -1);
+            break;
+        case "table-name":
+            courses.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
+            break;
+        case "table-prog":
+            courses.sort((a, b) => (a.progression > b.progression) ? 1 : -1);
+            break;
+        default:
+            console.log("INVALID CHOICE-ID");
+    }
+
+    createTable(courses);
+}
+
 function createTable(courses) {
     const tableElement = document.getElementsByTagName("tbody")[0];
+    tableElement.innerHTML = "";
 
     courses.forEach((course) => {
         tableElement.appendChild(createTableRow(course));
