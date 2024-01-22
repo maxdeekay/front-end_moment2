@@ -4,5 +4,35 @@
     margin: 0;
     padding: 0;
     border-sizing: border-box;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
 }
+
+h2 { font-size: 1.2em; }
+body { background-color: black; color: white; }
+
+main {
+    max-width: 50em;
+    margin: 0 auto;
+    border: 1px solid white;
+    margin-top: 1em;
+    padding: 0 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 97%;
+    align-self: center;
+    border: 1px solid white;
+    border-radius: 0.2em;
+    padding: 0.2em;
+    font-size: 1.1em;
+}
+
+/* TABLE STYLING */
+table { width: 100%; margin-top: 2em; }
+th { text-align: left; }
+td { padding: 1em 0; text-align: left; }
+tr:hover { color: orange; cursor: pointer; }
+#table-name { width: 70%; }
+td:last-child, th:last-child { text-align: center; }
