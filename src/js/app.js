@@ -5,15 +5,17 @@ window.onload = async () => {
     const response = await fetch(url);
 
     if (response.ok) {
-        const data = await response.json();
+        let data = await response.json();
         
         const inputElement = document.getElementById("search-input");
         inputElement.addEventListener("keyup", () => {
-            searchCourses(inputElement.value.toLowerCase(), data);
+            createTable(searchCourses(inputElement.value.toLowerCase(), data));
         });
-
+        
         Array.from(document.getElementsByTagName("th")).forEach((title) => {
-            title.onclick = () => sortCourses(title.id, data);
+            title.onclick = () => {
+                createTable(sortCourses(title.id, searchCourses(inputElement.value.toLowerCase(), data)));
+            }
         });
 
         createTable(data);
@@ -23,11 +25,9 @@ window.onload = async () => {
 }
 
 function searchCourses(input, courses) {
-    const searchResult = courses.filter(course => {
+    return courses.filter(course => {
         return course.code.includes(input) || course.coursename.toLowerCase().includes(input);
     });
-
-    createTable(searchResult);
 }
 
 function sortCourses(choice, courses) {
@@ -40,6 +40,8 @@ function sortCourses(choice, courses) {
             if (codeElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.code > b.code) ? 1 : -1);
                 codeElement.setAttribute("data-sortOrder", "asc");
+                nameElement.setAttribute("data-sortOrder", "default");
+                progElement.setAttribute("data-sortOrder", "default");
             } else {
                 courses.sort((a, b) => (a.code < b.code) ? 1 : -1);
                 codeElement.setAttribute("data-sortOrder", "desc");
@@ -50,6 +52,8 @@ function sortCourses(choice, courses) {
             if (nameElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
                 nameElement.setAttribute("data-sortOrder", "asc");
+                codeElement.setAttribute("data-sortOrder", "default");
+                progElement.setAttribute("data-sortOrder", "default");
             } else {
                 courses.sort((a, b) => (a.coursename < b.coursename) ? 1 : -1);
                 nameElement.setAttribute("data-sortOrder", "desc");
@@ -60,6 +64,8 @@ function sortCourses(choice, courses) {
             if (progElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.progression > b.progression) ? 1 : -1);
                 progElement.setAttribute("data-sortOrder", "asc");
+                codeElement.setAttribute("data-sortOrder", "default");
+                nameElement.setAttribute("data-sortOrder", "default");
             } else {
                 courses.sort((a, b) => (a.progression < b.progression) ? 1 : -1);
                 progElement.setAttribute("data-sortOrder", "desc");
@@ -70,7 +76,7 @@ function sortCourses(choice, courses) {
             console.log("INVALID CHOICE-ID");
     }
 
-    createTable(courses);
+    return courses;
 }
 
 function createTable(courses) {
