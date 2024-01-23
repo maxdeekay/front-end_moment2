@@ -12,8 +12,8 @@ window.onload = async () => {
             searchCourses(inputElement.value.toLowerCase(), data);
         });
 
-        Array.from(document.getElementsByTagName("th")).forEach((e) => {
-            e.addEventListener("click", () => sortCourses(e.id, data));
+        Array.from(document.getElementsByTagName("th")).forEach((title) => {
+            title.onclick = () => sortCourses(title.id, data);
         });
 
         createTable(data);
@@ -84,7 +84,7 @@ function createTableRow(course) {
     trElement.appendChild(nameElement);
     trElement.appendChild(progElement);
 
-    trElement.addEventListener("click", () => window.open(course.syllabus, '_blank'));
+    trElement.onclick = () => window.open(course.syllabus, "_blank");
 
     return trElement;
 }
