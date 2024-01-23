@@ -63,13 +63,6 @@ function createTable(courses) {
     courses.forEach((course) => {
         tableElement.appendChild(createTableRow(course));
     });
-
-    /* const xx = document.querySelectorAll("tbody>tr");
-    xx.forEach((e) => {
-        e.addEventListener("click", () => {
-
-        });
-    }); */
 }
 
 function createTableRow(course) {
