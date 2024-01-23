@@ -7,6 +7,11 @@ window.onload = async () => {
     if (response.ok) {
         const data = await response.json();
 
+        const inputElement = document.getElementById("search-input");
+        inputElement.addEventListener("keyup", () => {
+            searchCourses(inputElement.value.toLowerCase(), data);
+        });
+
         Array.from(document.getElementsByTagName("th")).forEach((e) => {
             e.addEventListener("click", () => sortCourses(e.id, data));
         });
@@ -15,6 +20,22 @@ window.onload = async () => {
     } else {
         console.log("ERROR: " + response.statusText);
     }
+}
+
+function searchCourses(input, courses) {
+    const searchResult = courses.filter(course => {
+        const coursenameLower = course.coursename.toLowerCase();
+
+        if (course.code.includes(input)) {
+            return true;
+        } else if (coursenameLower.includes(input)) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    createTable(searchResult);
 }
 
 function sortCourses(choice, courses) {
@@ -42,6 +63,13 @@ function createTable(courses) {
     courses.forEach((course) => {
         tableElement.appendChild(createTableRow(course));
     });
+
+    /* const xx = document.querySelectorAll("tbody>tr");
+    xx.forEach((e) => {
+        e.addEventListener("click", () => {
+
+        });
+    }); */
 }
 
 function createTableRow(course) {
@@ -62,6 +90,8 @@ function createTableRow(course) {
     trElement.appendChild(codeElement);
     trElement.appendChild(nameElement);
     trElement.appendChild(progElement);
+
+    trElement.addEventListener("click", () => window.open(course.syllabus, '_blank'));
 
     return trElement;
 }

@@ -9,12 +9,12 @@
 
 h2 { font-size: 1.2em; }
 body { background-color: black; color: white; }
+p { margin-top: 2em; font-style: italic; }
 
 main {
     max-width: 50em;
-    margin: 0 auto;
+    margin: 1em auto;
     border: 1px solid white;
-    margin: 1em;
     padding: 0 2em;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ input {
 }
 
 /* TABLE STYLING */
-table { width: 100%; margin-top: 2em; }
+table { width: 100%; margin-top: 1em; }
 th { text-align: left; }
 td { padding: 1em 0; text-align: left; }
 tbody>tr:hover { color: orange; cursor: pointer; }
