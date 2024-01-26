@@ -30,6 +30,12 @@ function searchCourses(input, courses) {
     });
 }
 
+function resetColumns(a, b, c) {
+    a.setAttribute("data-sortOrder", "asc");
+    b.setAttribute("data-sortOrder", "default");
+    c.setAttribute("data-sortOrder", "default");
+}
+
 function sortCourses(choice, courses) {
     const codeElement = document.getElementById("table-code");
     const nameElement = document.getElementById("table-name");
@@ -39,9 +45,7 @@ function sortCourses(choice, courses) {
         case "table-code":
             if (codeElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.code > b.code) ? 1 : -1);
-                codeElement.setAttribute("data-sortOrder", "asc");
-                nameElement.setAttribute("data-sortOrder", "default");
-                progElement.setAttribute("data-sortOrder", "default");
+                resetColumns(codeElement, nameElement, progElement);
             } else {
                 courses.sort((a, b) => (a.code < b.code) ? 1 : -1);
                 codeElement.setAttribute("data-sortOrder", "desc");
@@ -51,9 +55,7 @@ function sortCourses(choice, courses) {
         case "table-name":
             if (nameElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
-                nameElement.setAttribute("data-sortOrder", "asc");
-                codeElement.setAttribute("data-sortOrder", "default");
-                progElement.setAttribute("data-sortOrder", "default");
+                resetColumns(nameElement, codeElement, progElement);
             } else {
                 courses.sort((a, b) => (a.coursename < b.coursename) ? 1 : -1);
                 nameElement.setAttribute("data-sortOrder", "desc");
@@ -63,9 +65,7 @@ function sortCourses(choice, courses) {
         case "table-prog":
             if (progElement.getAttribute("data-sortOrder") != "asc") {
                 courses.sort((a, b) => (a.progression > b.progression) ? 1 : -1);
-                progElement.setAttribute("data-sortOrder", "asc");
-                codeElement.setAttribute("data-sortOrder", "default");
-                nameElement.setAttribute("data-sortOrder", "default");
+                resetColumns(progElement, codeElement, nameElement);
             } else {
                 courses.sort((a, b) => (a.progression < b.progression) ? 1 : -1);
                 progElement.setAttribute("data-sortOrder", "desc");
